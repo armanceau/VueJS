@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma superbe interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <section class="header">
+                <div>
+                    <label for="login">Login :</label>
+                </div>
+
+                <div>
+                    <input type="text" name="login" v-model="user" />
+                </div>
+
+                <div>
+                    <p>Bonjour {{user}} !</p>
+                </div>
+            </section>
+
+            <div class="main">
+
+                <section class="produit">
+                    <section class="mainHeader">
+                        <h1>Produits displonibles</h1>
+                    </section>
+    
+                    <section class="mainContent" >
+                        <div v-for="produit in produits">
+                            {{produit}}
+                            <button v-on:click="commander(produit)">Miam!</button>
+                        </div>
+                    </section>
+                </section>
+
+                <section class="commande" v-if="commandes.length > 0">
+                    <section class="mainHeader">
+                        <h1>Produits commandés</h1>
+                    </section>
+    
+                    <section class="mainContent" >
+                        <ul>
+                            <li v-for="commande in commandes">
+                                {{commande}}
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        Vue.component('fiche-produit',{
+            template:''
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                user: "Arthur",
+                produits: ["Pizza", "Hamburger", "Cheeseburger", "Tacos"],
+                commandes: []
+            },
+            methods:{
+                commander: function(produit){
+                    this.commandes.push(produit);
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
